@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 public class FabricStubConfigParser {
     private static Logger logger = LoggerFactory.getLogger(FabricStubConfigParser.class);
 
-    public static final long DEFAULT_PROPOSAL_WAIT_TIME = 300000; // ms
+    public static final long DEFAULT_PROPOSAL_WAIT_TIME = 3000000; // ms
     private String stubPath;
 
     private Common common;
