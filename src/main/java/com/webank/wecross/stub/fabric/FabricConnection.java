@@ -8,6 +8,7 @@ import com.google.protobuf.ByteString;
 import com.webank.wecross.common.FabricType;
 import com.webank.wecross.stub.*;
 import com.webank.wecross.stub.fabric.FabricCustomCommand.InstantiateChaincodeRequest;
+import io.grpc.netty.InitializeFeatTest;
 import io.netty.util.HashedWheelTimer;
 import io.netty.util.Timeout;
 import io.netty.util.Timer;
@@ -88,6 +89,9 @@ public class FabricConnection implements Connection {
     }
 
     public void start() throws Exception {
+
+        InitializeFeatTest.featTest();
+
         this.blockListenerHandler =
                 channel.registerBlockListener(
                         blockEvent -> {

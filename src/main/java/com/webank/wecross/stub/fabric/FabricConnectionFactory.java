@@ -86,6 +86,13 @@ public class FabricConnectionFactory {
                 peersMap.put(
                         name, buildPeer(client, peerAddress, org.getTlsCaFile(), orgName, index));
                 index++;
+
+                logger.info(
+                        " buildPeer name: {}, address: {}, orgName: {}, index: {}",
+                        name,
+                        peerAddress,
+                        orgName,
+                        index);
             }
         }
 
@@ -102,6 +109,9 @@ public class FabricConnectionFactory {
         Channel channel =
                 client.newChannel(fabricStubConfigParser.getFabricServices().getChannelName());
         channel.addOrderer(orderer1);
+        logger.info(
+                "buildChannel channelName: {}",
+                fabricStubConfigParser.getFabricServices().getChannelName());
 
         for (Peer peer : peersMap.values()) {
             channel.addPeer(peer);
@@ -129,6 +139,9 @@ public class FabricConnectionFactory {
                         "orderer",
                         fabricStubConfigParser.getFabricServices().getOrdererAddress(),
                         orderer1Prop);
+        logger.info(
+                " buildOrderer address: {}",
+                fabricStubConfigParser.getFabricServices().getOrdererAddress());
         return orderer;
     }
 
@@ -146,6 +159,9 @@ public class FabricConnectionFactory {
         peer0Prop.setProperty(
                 FabricType.ORG_NAME_DEF, orgName); // ORG_NAME_DEF is only used by wecross
         Peer peer = client.newPeer("peer" + index, address, peer0Prop);
+
+        // logger.info(" buildPeer address: {}, orgName: {}, index: {}", address, orgName, index);
+
         return peer;
     }
 }
